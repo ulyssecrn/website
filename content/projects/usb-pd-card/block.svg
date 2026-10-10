@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 290" role="img" aria-label="Block diagram. USB side: USB-C paddle, VBUS through TVS and 10 µF to the ME6228A33 3.3 V regulator that powers the CH32X035; CC1 and CC2 through 5.1 kΩ Rd and ESD to the CH32X035, which drives 12 LEDs. NFC side, separate: PCB coil to NT3H2111 to an LED powered by the phone's field." font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="13" fill="currentColor">
+  <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="currentColor"/></marker></defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.2">
+    <rect x="1" y="10" width="140" height="52" rx="6"/>
+    <rect x="170" y="10" width="140" height="52" rx="6"/>
+    <rect x="339" y="10" width="140" height="52" rx="6"/>
+    <rect x="1" y="100" width="140" height="52" rx="6"/>
+    <rect x="170" y="100" width="140" height="52" rx="6" stroke-width="2.2"/>
+    <rect x="339" y="100" width="140" height="52" rx="6"/>
+    <rect x="1" y="226" width="140" height="52" rx="6"/>
+    <rect x="170" y="226" width="140" height="52" rx="6"/>
+    <rect x="339" y="226" width="140" height="52" rx="6"/>
+    <path d="M141 36H168M310 36H337M71 62V98M141 126H168M310 126H337M141 252H168M310 252H337" marker-end="url(#a)"/>
+    <path d="M409 62V80H240V98" marker-end="url(#a)"/>
+    <path d="M1 190H479" stroke-dasharray="4 4" opacity="0.5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="71" y="33">USB-C paddle</text><text x="71" y="50" opacity="0.65">PCB edge</text>
+    <text x="240" y="33">TVS + 10 µF</text><text x="240" y="50" opacity="0.65">SMF20A</text>
+    <text x="409" y="33">3.3 V LDO</text><text x="409" y="50" opacity="0.65">ME6228A33</text>
+    <text x="71" y="123">Rd 5.1 kΩ</text><text x="71" y="140" opacity="0.65">+ ESD</text>
+    <text x="240" y="123" font-weight="700">CH32X035</text><text x="240" y="140" opacity="0.65">USB PD PHY</text>
+    <text x="409" y="123">12 LEDs</text><text x="409" y="140" opacity="0.65">7 caps + 5 W bar</text>
+    <text x="71" y="249">PCB coil</text><text x="71" y="266" opacity="0.65">2.75 µH</text>
+    <text x="240" y="249">NT3H2111</text><text x="240" y="266" opacity="0.65">NFC tag</text>
+    <text x="409" y="249">NFC LED</text><text x="409" y="266" opacity="0.65">field powered</text>
+  </g>
+  <g font-size="11" opacity="0.75">
+    <text x="146" y="30">VBUS</text>
+    <text x="76" y="84">CC1/2</text>
+    <text x="146" y="120">CC</text>
+    <text x="246" y="76">3.3 V</text>
+    <text x="1" y="210">NFC: separate circuit, no battery, works with no cable</text>
+  </g>
+</svg>

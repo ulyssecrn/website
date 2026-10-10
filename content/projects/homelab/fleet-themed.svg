@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 640 340" role="img" aria-label="Diagram: one NixOS flake defines five hosts, a ZFS storage server, an LLM inference server, a Raspberry Pi DNS resolver, a laptop and an M1 MacBook on Asahi Linux" font-family="ui-monospace, SF Mono, Menlo, monospace">
+  
+  <rect class="fl-hub" x="220" y="44" width="200" height="64" rx="8" stroke-width="1.5"/>
+  <text x="320" y="72" text-anchor="middle" font-size="17" class="fl-title" font-weight="700">nixos-config</text>
+  <text x="320" y="94" text-anchor="middle" font-size="13" class="fl-sub">one flake</text>
+  <g class="fl-line" stroke-width="1.5" fill="none">
+    <path d="M320 108V150M70 150H570M70 150V196M195 150V196M320 150V196M445 150V196M570 150V196"/>
+  </g>
+  <g class="fl-box">
+    <rect x="12" y="196" width="116" height="92" rx="8"/><rect x="137" y="196" width="116" height="92" rx="8"/><rect x="262" y="196" width="116" height="92" rx="8"/><rect x="387" y="196" width="116" height="92" rx="8"/><rect x="512" y="196" width="116" height="92" rx="8"/>
+  </g>
+  <g text-anchor="middle" class="fl-title" font-size="14" font-weight="700">
+    <text x="70" y="226">ZFS server</text><text x="195" y="226">LLM server</text><text x="320" y="226">Pi DNS</text><text x="445" y="226">laptop</text><text x="570" y="226">Asahi M1</text>
+  </g>
+  <g text-anchor="middle" class="fl-sub" font-size="11.5">
+    <text x="70" y="250">Nextcloud</text><text x="70" y="266">Immich</text><text x="70" y="282">Paperless</text>
+    <text x="195" y="250">llama.cpp</text><text x="195" y="266">LibreChat</text><text x="195" y="282">SearXNG</text>
+    <text x="320" y="250">Pi-hole</text><text x="320" y="266">aarch64</text>
+    <text x="445" y="250">x86_64</text>
+    <text x="570" y="250">aarch64</text>
+  </g>
+  <text x="320" y="346" text-anchor="middle" font-size="13" class="fl-accent">Caddy · restic · Prometheus · Grafana · Alertmanager</text>
+</svg>

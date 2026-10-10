@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 75" role="img" aria-label="Placeholder outline of the business card: USB-C paddle on the left edge, NFC coil on the right half">
+<rect width="120" height="75" fill="#0b0b0d"/>
+<rect x="17.2" y="10.5" width="85.6" height="54" rx="3" fill="#1c1c20" stroke="#3a3a40" stroke-width="0.3"/>
+<polygon points="97.74,37.50 88.27,53.90 69.33,53.90 59.86,37.50 69.33,21.10 88.27,21.10 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="97.05,37.50 87.92,53.30 69.68,53.30 60.55,37.50 69.68,21.70 87.92,21.70 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="96.35,37.50 87.58,52.70 70.02,52.70 61.25,37.50 70.02,22.30 87.58,22.30 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="95.66,37.50 87.23,52.10 70.37,52.10 61.94,37.50 70.37,22.90 87.23,22.90 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="94.97,37.50 86.88,51.50 70.72,51.50 62.63,37.50 70.72,23.50 86.88,23.50 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="94.28,37.50 86.54,50.90 71.06,50.90 63.32,37.50 71.06,24.10 86.54,24.10 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<polygon points="93.58,37.50 86.19,50.30 71.41,50.30 64.02,37.50 71.41,24.70 86.19,24.70 " fill="none" stroke="#2c2c31" stroke-width="0.35"/>
+<rect x="17.2" y="33.33" width="4.46" height="0.92" fill="#0b0b0d"/>
+<rect x="17.2" y="40.75" width="4.46" height="0.92" fill="#0b0b0d"/>
+<rect x="17.6" y="34.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="34.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="35.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="35.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="36.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="36.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="37.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="37.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="38.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="38.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="39.40" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="17.6" y="39.90" width="3.4" height="0.3" fill="#d4a843"/>
+<rect x="28.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="32.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="36.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="40.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="44.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="48.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="52.00" y="20" width="1.6" height="0.8" fill="#f2f1ec" opacity="0.55"/>
+<rect x="28.00" y="52" width="4" height="1" fill="#f2f1ec" opacity="0.35"/>
+<rect x="33.00" y="52" width="4" height="1" fill="#f2f1ec" opacity="0.35"/>
+<rect x="38.00" y="52" width="4" height="1" fill="#f2f1ec" opacity="0.35"/>
+<rect x="43.00" y="52" width="4" height="1" fill="#f2f1ec" opacity="0.35"/>
+<rect x="48.00" y="52" width="4" height="1" fill="#f2f1ec" opacity="0.35"/>
+<text x="28" y="40" font-family="ui-monospace, monospace" font-size="2.6" fill="#f2f1ec" opacity="0.8">Render pending</text>
+<text x="28" y="44" font-family="ui-monospace, monospace" font-size="1.8" fill="#f2f1ec" opacity="0.5">layout in progress</text>
+</svg>
