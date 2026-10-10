@@ -3,15 +3,14 @@ title = "PCBGolf: shrinking a CAN-FD dev board"
 description = "My entry to comma.ai's PCBGolf challenge: every interface of a 4-port CAN-FD dev board on a 4-layer, double-sided board of 33.9 × 42.1 mm."
 weight = 20
 template = "project.html"
-# Hidden until the repo is public and the entry is submitted.
-draft = true
 
 [extra]
 featured = true
 status = "In progress"
 tags = ["PCB", "Miniaturization", "BGA", "CAN-FD"]
-image = "placeholder.svg"
-image_alt = "Placeholder for the PCBGolf board render."
+image = "render.png"
+image_alt = "KiCad 3D render of the board: a barrel jack, a USB-C host port and four USB-C ports along one edge, with small parts packed between them"
+image_caption = "KiCad render of the work in progress."
 kicanvas = true
 specs = [
   ["Challenge", "comma.ai PCBGolf"],
@@ -43,7 +42,7 @@ The schematic is comma's. I did the placement, the routing and the design decisi
 
 ## Design files
 
-{{ <kicanvas repo="ulyssecrn/PCBGolf" file="pcbgolf.kicad_pcb" label="PCB layout" /> }}
+{{ <kicanvas repo="ulyssecrn/PCBGolf" file="pcbgolf.kicad_pcb" label="PCB layout (in progress)" ref="master" /> }}
 
 The repo is at [github.com/ulyssecrn/PCBGolf](https://github.com/ulyssecrn/PCBGolf).
 

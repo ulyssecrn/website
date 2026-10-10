@@ -5,7 +5,6 @@ weight = 30
 template = "project.html"
 
 [extra]
-featured = true
 tags = ["Nix", "Linux", "Monitoring"]
 image = "cover.jpg"
 image_alt = "Left: the silver Power Mac G5 case that holds the LLM server. Right: the ZFS storage server through its glass side panel"

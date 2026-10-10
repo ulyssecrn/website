@@ -8,13 +8,14 @@ template = "project.html"
 featured = true
 status = "In progress"
 tags = ["PCB", "USB-C", "NFC", "Firmware"]
-image = "placeholder.svg"
-image_alt = "Placeholder outline of the business card. A real render replaces it once the layout is done."
+image = "render.png"
+image_alt = "KiCad 3D render of the card: name and contact details on the left, LEDs labeled by voltage and wattage and the USB-C edge plug on the right"
+image_caption = "KiCad render of the work in progress."
 kicanvas = true
 specs = [
   ["Size", "85.6 × 54 mm"],
   ["Board", "0.6 mm FR4, ENIG"],
-  ["Finish", "Matte black, white silkscreen"],
+  ["Finish", "Purple soldermask, white silkscreen"],
   ["Thickness", "About 1.7 mm with parts"],
   ["MCU", "WCH CH32X035"],
   ["NFC", "NXP NT3H2111"],
