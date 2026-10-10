@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- set page_title = (page.title ~ " | " ~ config.title) if page else ((section.title ~ " | " ~ config.title) if section and section.path != "/" else config.title) -%}
+  {%- set page_desc = (page.description or config.description) if page else ((section.description or config.description) if section else config.description) -%}
+  <title>{% block title %}{{ page_title }}{% endblock %}</title>
+  <meta name="description" content="{{ page_desc }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ current_url or config.base_url }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1e22" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="preload" href="{{ get_url(path='fonts/crimson-pro-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
+  <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main">
+      <a class="nav-name" href="{{ get_url(path='/') }}">Ulysse Corne</a>
+      {%- set cp = current_path or "" %}
+      <ul class="nav-links">
+        <li><a href="{{ get_url(path='@/projects/_index.md') }}"{% if cp is starting_with(pat="/projects/") %} aria-current="page"{% endif %}>Projects</a></li>
+        <li><a href="{{ get_url(path='@/experience/_index.md') }}"{% if cp is starting_with(pat="/experience/") %} aria-current="page"{% endif %}>Experience</a></li>
+        <li><a href="{{ get_url(path='@/notes/_index.md') }}"{% if cp is starting_with(pat="/notes/") %} aria-current="page"{% endif %}>Notes</a></li>
+        <li><a href="{{ get_url(path='@/about/index.md') }}"{% if cp == "/about/" %} aria-current="page"{% endif %}>About</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" aria-label="Switch between light and dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </nav>
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      {{ <social_links /> }}
+      <p class="fine">Built with Zola and Nix. Served from my home server. <a href="https://github.com/ulyssecrn/website">Source</a></p>
+    </div>
+  </footer>
+  <script>document.querySelector(".theme-toggle").addEventListener("click",function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches,t=dark?"light":"dark";r.dataset.theme=t;try{localStorage.setItem("theme",t)}catch(e){}})</script>
+</body>
+</html>

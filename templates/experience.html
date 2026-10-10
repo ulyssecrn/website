@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>{{ section.title }}</h1>
+  {% if section.content %}<div class="prose">{{ section.content | safe }}</div>{% endif %}
+</section>
+{% set show = "work" %}{% include "listing.html" %}
+{% endblock %}

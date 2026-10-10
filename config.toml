@@ -1,0 +1,19 @@
+base_url = "https://ulysse.corne.sh"
+title = "Ulysse Corne"
+description = "Ulysse Corne designs PCBs and writes the firmware that runs on them. MS ECE at Carnegie Mellon."
+default_language = "en"
+
+compile_sass = true
+minify_html = true
+build_search_index = false
+generate_feeds = false
+
+[markdown]
+smart_punctuation = false
+external_links_target_blank = true
+external_links_no_referrer = true
+
+[extra]
+email = "ucorne@andrew.cmu.edu"
+github = "https://github.com/ulyssecrn"
+linkedin = "https://www.linkedin.com/in/ulysse-corne"

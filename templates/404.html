@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Not found | {{ config.title }}{% endblock %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>No trace here.</h1>
+  <p class="lede">This page does not exist. Try the <a href="{{ get_url(path='/') }}">home page</a> or the <a href="{{ get_url(path='@/projects/_index.md') }}">projects</a>.</p>
+</section>
+{% endblock %}

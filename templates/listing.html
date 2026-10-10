@@ -1,0 +1,24 @@
+{#- Shared bodies. Set `show` to "personal", "work" or "both" before including. -#}
+{%- if show != "work" %}
+{%- set personal = get_section(path="projects/_index.md") %}
+{#- Home shows only featured projects. The Projects page shows all of them. -#}
+{%- set shown = [p for p in personal.pages if p.extra.featured is defined] if show == "both" else personal.pages %}
+<section class="wrap" aria-labelledby="personal">
+  <h2 id="personal" class="section-label">Personal projects</h2>
+  <div class="board-grid">
+    {% for p in shown %}{{ <board_card p={p} /> }}{% endfor %}
+  </div>
+  {%- if show == "both" and personal.pages | length > shown | length %}
+  <p class="see-all"><a href="{{ get_url(path='@/projects/_index.md') }}">See all projects <span aria-hidden="true">→</span></a></p>
+  {%- endif %}
+</section>
+{%- endif %}
+{%- if show != "personal" %}
+{%- set work = get_section(path="experience/_index.md") %}
+<section class="wrap" aria-labelledby="work">
+  <h2 id="work" class="section-label">Work and research</h2>
+  <div class="org-list">
+    {% for path in work.subsections %}{{ <org_group s={get_section(path=path)} /> }}{% endfor %}
+  </div>
+</section>
+{%- endif %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set photo = resize_image(path="about/headshot.jpg", width=320, height=320, op="fill", format="webp", quality=85) %}
+<section class="wrap hero">
+  <img class="hero-photo" src="{{ photo.url }}" width="160" height="160" alt="Ulysse Corne">
+  <div class="hero-text">
+    <h1>Hi, I'm Ulysse.</h1>
+    <p class="tagline">{{ section.extra.tagline }}</p>
+    <p class="lede">{{ section.extra.lede }}</p>
+    {{ <social_links /> }}
+  </div>
+</section>
+{% set show = "both" %}{% include "listing.html" %}
+{% endblock %}

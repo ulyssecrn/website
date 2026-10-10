@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="wrap page-head">
+  <h1>{{ section.title }}</h1>
+  {% if section.content %}<div class="prose">{{ section.content | safe }}</div>{% endif %}
+</section>
+<section class="wrap">
+  <ul class="note-list">
+    {% for p in section.pages %}
+    <li>
+      <a href="{{ p.permalink | safe }}" class="card-link note-item">
+        <p class="kicker">{{ p.date | date(format="%B %Y") }}{% if p.extra.kind is defined %} · {{ p.extra.kind }}{% endif %}</p>
+        <h2>{{ p.title }}</h2>
+        <p>{{ p.description }}</p>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

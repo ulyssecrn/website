@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block head %}{% if page.extra.kicanvas is defined %}<script type="module" src="{{ get_url(path='kicanvas-loader.js', cachebust=true) }}"></script>{% endif %}{% endblock %}
+{% block content %}
+<article class="project">
+  <header class="wrap project-head">
+    {%- set parent = get_section(path=page.ancestors[-1]) %}
+    {%- if parent.extra.org is defined %}<a class="back" href="{{ get_url(path='@/experience/_index.md') }}"><span aria-hidden="true">←</span> Experience</a>{% else %}<a class="back" href="{{ get_url(path='@/projects/_index.md') }}"><span aria-hidden="true">←</span> Projects</a>{% endif %}
+    {% if parent.extra.org is defined %}<p class="kicker">{{ parent.extra.org }} · {{ page.extra.role if page.extra.role is defined else parent.extra.role }} · {{ page.extra.dates if page.extra.dates is defined else parent.extra.dates }}</p>{% endif %}
+    <h1>{{ page.title }}</h1>
+    {{ <meta tags={page.extra.tags} status={page.extra.status if page.extra.status is defined else ""} /> }}
+  </header>
+
+  {% if page.extra.image is defined %}
+  <figure class="wrap project-hero">
+    {{ <pic p={page} file={page.extra.image} alt={page.extra.image_alt} sizes="(min-width: 68rem) 68rem, 100vw" eager={true} /> }}
+    {% if page.extra.image_caption is defined %}<figcaption>{{ page.extra.image_caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  {% if page.extra.specs is defined %}
+  <dl class="wrap specs">
+    {% for s in page.extra.specs %}<div><dt>{{ s[0] }}</dt><dd>{{ s[1] }}</dd></div>{% endfor %}
+  </dl>
+  {% endif %}
+
+  <div class="wrap prose">
+    {{ page.content | safe }}
+  </div>
+</article>
+{% endblock %}

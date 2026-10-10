@@ -1,0 +1,135 @@
+{#- Components are registered globally (Tera v2): use them from any template or from content
+    as {{ <name arg="..." /> }}. They only see the parameters passed to them. -#}
+
+{#- Responsive image for a file colocated with a page. SVGs pass through,
+    raster images are resized to WebP at two widths. -#}
+{% component pic(p, file: string, alt: string, sizes: string = "100vw", eager: bool = false, focus: string = "") -%}
+  {%- if file is ending_with(pat=".svg") -%}
+    <img src="{{ p.path }}{{ file }}" alt="{{ alt }}"{% if focus %} style="object-position: {{ focus }}"{% endif %}{% if not eager %} loading="lazy"{% endif %}>
+  {%- else -%}
+    {%- set path = p.colocated_path ~ file -%}
+    {%- set s = resize_image(path=path, width=640, op="fit_width", format="webp", quality=82) -%}
+    {%- set l = resize_image(path=path, width=1280, op="fit_width", format="webp", quality=82) -%}
+    <img src="{{ l.url }}" srcset="{{ s.url }} 640w, {{ l.url }} 1280w" sizes="{{ sizes }}"{% if focus %} style="object-position: {{ focus }}"{% endif %}
+         width="{{ l.width }}" height="{{ l.height }}" alt="{{ alt }}"{% if not eager %} loading="lazy"{% endif %} decoding="async">
+  {%- endif -%}
+{%- endcomponent pic %}
+
+{% component meta(tags, status = "") -%}
+<div class="card-meta">
+  {%- if tags %}<ul class="tags">{% for t in tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif -%}
+  {%- if status %}<span class="status">{{ status }}</span>{% endif -%}
+</div>
+{%- endcomponent meta %}
+
+{#- A personal board: big image, wide card. -#}
+{% component board_card(p) -%}
+<article class="board-card">
+  <a href="{{ p.permalink | safe }}" class="card-link">
+    <div class="board-media">
+      {%- if p.extra.image is defined -%}
+        {{ <pic p={p} file={p.extra.image} alt={p.extra.image_alt} sizes="(min-width: 52rem) 40rem, 100vw" focus={p.extra.image_focus if p.extra.image_focus is defined else ""} /> }}
+      {%- else -%}
+        <p class="media-figure">{{ p.extra.figure }}<span>{{ p.extra.figure_label }}</span></p>
+      {%- endif -%}
+    </div>
+    <div class="board-body">
+      {{ <meta tags={p.extra.tags} status={p.extra.status if p.extra.status is defined else ""} /> }}
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+      <span class="more">Read more <span aria-hidden="true">→</span></span>
+    </div>
+  </a>
+</article>
+{%- endcomponent board_card %}
+
+{#- Media block for a card: the image if there is one, otherwise a big headline number. -#}
+{% component card_media(p, sizes: string = "100vw") -%}
+<div class="card-media">
+  {%- if p.extra.image is defined -%}
+    {{ <pic p={p} file={p.extra.image} alt={p.extra.image_alt} sizes={sizes} focus={p.extra.image_focus if p.extra.image_focus is defined else ""} /> }}
+  {%- else -%}
+    <p class="media-figure">{{ p.extra.figure }}<span>{{ p.extra.figure_label }}</span></p>
+  {%- endif -%}
+</div>
+{%- endcomponent card_media %}
+
+{#- One project inside an employer group. -#}
+{% component project_card(p) -%}
+<article class="project-card">
+  <a href="{{ p.permalink | safe }}" class="card-link">
+    {{ <card_media p={p} sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 50vw, 100vw" /> }}
+    <div class="card-body">
+      {{ <meta tags={p.extra.tags} /> }}
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+    </div>
+  </a>
+</article>
+{%- endcomponent project_card %}
+
+{#- An employer or lab: context on top, its projects as cards inside. -#}
+{% component org_group(s) -%}
+<section class="org" aria-labelledby="org-{{ s.extra.slug }}">
+  <header class="org-head{% if s.extra.image is defined %} has-photo{% endif %}">
+    <div class="org-text">
+      <h3 id="org-{{ s.extra.slug }}" class="org-name">{{ s.extra.org }}</h3>
+      <p class="org-role">{{ s.extra.role }} · {{ s.extra.place }} · {{ s.extra.dates }}</p>
+      <p class="org-context">{{ s.extra.context }}</p>
+      <a class="org-link" href="{{ s.extra.url }}">{{ s.extra.url_label }}</a>
+    </div>
+    {%- if s.extra.image is defined %}
+    {%- set i = resize_image(path=s.extra.image, width=900, op="fit_width", format="webp", quality=82) %}
+    <figure class="org-photo">
+      <img src="{{ i.url }}" width="{{ i.width }}" height="{{ i.height }}" alt="{{ s.extra.image_alt }}" loading="lazy" decoding="async">
+      <figcaption>{{ s.extra.image_caption }}</figcaption>
+    </figure>
+    {%- endif %}
+  </header>
+  <div class="org-grid">
+    {% for p in s.pages %}{{ <project_card p={p} /> }}{% endfor %}
+  </div>
+</section>
+{%- endcomponent org_group %}
+
+{% component social_links(@config) -%}
+<ul class="social">
+  <li><a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a></li>
+  <li><a href="{{ config.extra.github }}">GitHub</a></li>
+  <li><a href="{{ config.extra.linkedin }}">LinkedIn</a></li>
+  <li><a href="{{ get_url(path='resume.pdf') }}">Resume (PDF)</a></li>
+</ul>
+{%- endcomponent social_links %}
+
+{#- Interactive KiCad viewer, loaded only when the reader taps the button
+    (kicanvas.js is ~470 KB and most visitors are on a phone). -#}
+{% component kicanvas(repo: string, file: string, label: string, ref: string = "main") -%}
+{%- set blob = "https://github.com/" ~ repo ~ "/blob/" ~ ref ~ "/" ~ file -%}
+<div class="kicanvas" data-src="https://raw.githubusercontent.com/{{ repo }}/{{ ref }}/{{ file }}">
+  <div class="kicanvas-placeholder">
+    <p class="kicanvas-label">{{ label }}</p>
+    <button type="button" class="kicanvas-load">Load interactive viewer</button>
+    <a href="https://kicanvas.org/?github={{ blob | urlencode_strict }}">Open in KiCanvas</a>
+  </div>
+</div>
+{%- endcomponent kicanvas %}
+
+{#- Inline an SVG colocated with the page so it inherits currentColor and follows the theme. -#}
+{% component diagram(@page, file: string, caption: string = "") -%}
+<figure class="diagram">
+  {{ load_data(path=page.colocated_path ~ file, format="plain") | safe }}
+  {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>
+{%- endcomponent diagram %}
+
+{#- A photo inside a page's text, resized to WebP. Usage: {{ <fig file="x.jpg" alt="..." caption="..." /> }} -#}
+{% component fig(@page, file: string, alt: string, caption: string = "") -%}
+{%- set path = page.colocated_path ~ file -%}
+{%- set s = resize_image(path=path, width=700, op="fit_width", format="webp", quality=82) -%}
+{%- set l = resize_image(path=path, width=1400, op="fit_width", format="webp", quality=82) -%}
+<figure class="fig">
+  <img src="{{ l.url }}" srcset="{{ s.url }} 700w, {{ l.url }} 1400w" sizes="(min-width: 46rem) 42rem, 100vw"
+       width="{{ l.width }}" height="{{ l.height }}" alt="{{ alt }}" loading="lazy" decoding="async">
+  {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>
+{%- endcomponent fig %}
