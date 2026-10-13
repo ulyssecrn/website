@@ -309,7 +309,13 @@ h3 { font-size: 1.4rem; }
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
-  &.loaded { aspect-ratio: 4 / 3; }
+  // Once loaded, break out of the text column to the page width: the full
+  // controls add a side panel that needs the room.
+  &.loaded {
+    width: min(100vw - 2rem, 64rem);
+    margin-inline: calc(50% - min(50vw - 1rem, 32rem));
+    aspect-ratio: 16 / 10; min-height: 28rem;
+  }
   kicanvas-embed { display: block; width: 100%; height: 100%; }
 }
 .kicanvas-placeholder {

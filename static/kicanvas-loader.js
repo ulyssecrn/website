@@ -8,7 +8,8 @@ document.addEventListener("click", async (e) => {
   await import("/vendor/kicanvas.js");
   const embed = document.createElement("kicanvas-embed");
   embed.setAttribute("src", box.dataset.src);
-  embed.setAttribute("controls", "basic");
+  // "full" adds the side panel: layer visibility, objects and properties.
+  embed.setAttribute("controls", "full");
   box.replaceChildren(embed);
   box.classList.add("loaded");
 });
