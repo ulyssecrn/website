@@ -251,7 +251,7 @@ h3 { font-size: 1.4rem; }
 .project-hero {
   margin-block: 2rem 0;
   // Whole photo, never cropped: tall photos get narrower instead of cut.
-  img, svg { display: block; width: auto; max-width: 100%; height: auto; max-height: min(75vh, 38rem); margin-inline: auto; border-radius: var(--radius); background: var(--board); }
+  img, svg { display: block; width: auto; max-width: 100%; height: auto; max-height: min(75vh, 38rem); margin-inline: auto; border-radius: var(--radius); }
   figcaption { text-align: center; }
   img[src$=".svg"] { width: 100%; }
   figcaption { color: var(--muted); font-size: 1rem; margin-top: 0.5rem; }
@@ -483,3 +483,8 @@ h3 { font-size: 1.4rem; }
 }
 .fig-row.wide img { aspect-ratio: 4 / 3; }
 .fig-row.even img { aspect-ratio: 1; }
+.fig-row.natural img { aspect-ratio: auto; }
+
+// The dark backdrop is for text-only cards. Behind a photo or a transparent
+// render it would show through, so cards with an image use the card surface.
+.board-media:has(img), .card-media:has(img) { background: var(--surface); }
