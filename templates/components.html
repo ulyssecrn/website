@@ -2,7 +2,9 @@
     as {{ <name arg="..." /> }}. They only see the parameters passed to them. -#}
 
 {#- Responsive image for a file colocated with a page. SVGs pass through,
-    raster images are resized to WebP at two widths. -#}
+    raster images are resized to WebP at two widths. Zola names resized files
+    after the path and settings, not the content, and Caddy serves them as
+    immutable, so every resized URL carries ?v= with a hash of the source. -#}
 {% component pic(p, file: string, alt: string, sizes: string = "100vw", eager: bool = false, focus: string = "") -%}
   {%- if file is ending_with(pat=".svg") -%}
     <img src="{{ p.path }}{{ file }}" alt="{{ alt }}"{% if focus %} style="object-position: {{ focus }}"{% endif %}{% if not eager %} loading="lazy"{% endif %}>
@@ -10,7 +12,8 @@
     {%- set path = p.colocated_path ~ file -%}
     {%- set s = resize_image(path=path, width=640, op="fit_width", format="webp", quality=82) -%}
     {%- set l = resize_image(path=path, width=1280, op="fit_width", format="webp", quality=82) -%}
-    <img src="{{ l.url }}" srcset="{{ s.url }} 640w, {{ l.url }} 1280w" sizes="{{ sizes }}"{% if focus %} style="object-position: {{ focus }}"{% endif %}
+    {%- set v = "?v=" ~ get_hash(path="content/" ~ path, sha_type=256, base64=false) | truncate(length=12, end="") -%}
+    <img src="{{ l.url }}{{ v }}" srcset="{{ s.url }}{{ v }} 640w, {{ l.url }}{{ v }} 1280w" sizes="{{ sizes }}"{% if focus %} style="object-position: {{ focus }}"{% endif %}
          width="{{ l.width }}" height="{{ l.height }}" alt="{{ alt }}"{% if not eager %} loading="lazy"{% endif %} decoding="async">
   {%- endif -%}
 {%- endcomponent pic %}
@@ -80,8 +83,9 @@
     </div>
     {%- if s.extra.image is defined %}
     {%- set i = resize_image(path=s.extra.image, width=900, op="fit_width", format="webp", quality=82) %}
+    {%- set v = "?v=" ~ get_hash(path="content/" ~ s.extra.image, sha_type=256, base64=false) | truncate(length=12, end="") %}
     <figure class="org-photo">
-      <img src="{{ i.url }}" width="{{ i.width }}" height="{{ i.height }}" alt="{{ s.extra.image_alt }}" loading="lazy" decoding="async">
+      <img src="{{ i.url }}{{ v }}" width="{{ i.width }}" height="{{ i.height }}" alt="{{ s.extra.image_alt }}" loading="lazy" decoding="async">
       <figcaption>{{ s.extra.image_caption }}</figcaption>
     </figure>
     {%- endif %}
@@ -127,8 +131,9 @@
 {%- set path = page.colocated_path ~ file -%}
 {%- set s = resize_image(path=path, width=700, op="fit_width", format="webp", quality=82) -%}
 {%- set l = resize_image(path=path, width=1400, op="fit_width", format="webp", quality=82) -%}
+{%- set v = "?v=" ~ get_hash(path="content/" ~ path, sha_type=256, base64=false) | truncate(length=12, end="") -%}
 <figure class="fig">
-  <img src="{{ l.url }}" srcset="{{ s.url }} 700w, {{ l.url }} 1400w" sizes="(min-width: 46rem) 42rem, 100vw"
+  <img src="{{ l.url }}{{ v }}" srcset="{{ s.url }}{{ v }} 700w, {{ l.url }}{{ v }} 1400w" sizes="(min-width: 46rem) 42rem, 100vw"
        width="{{ l.width }}" height="{{ l.height }}" alt="{{ alt }}" loading="lazy" decoding="async">
   {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
 </figure>
