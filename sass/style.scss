@@ -200,9 +200,12 @@ h3 { font-size: 1.4rem; }
 }
 .board-media {
   background: var(--board);
-  aspect-ratio: 16 / 10;
   position: relative;
   overflow: hidden;
+  // 16:10 as a minimum height, not an aspect-ratio: an aspect-ratio would stop
+  // the grid from stretching the image to the text's height when the text is
+  // taller, which left a gap under it. Then the image crops instead.
+  &::before { content: ""; display: block; padding-top: 62.5%; }
   img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 }
 .board-body {
